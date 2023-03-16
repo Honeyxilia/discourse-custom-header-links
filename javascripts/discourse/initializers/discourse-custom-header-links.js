@@ -24,7 +24,7 @@ export default {
         .split("|")
         .filter(Boolean)
         .map((customHeaderLinksArray) => {
-          const [linkText, linkTitle, linkHref, device, target, keepOnScroll] =
+          const [linkText, linkTitle, linkHref, device, target, keepOnScroll, locale] =
             customHeaderLinksArray
               .split(",")
               .filter(Boolean)
@@ -36,6 +36,7 @@ export default {
           const linkClass = `.${linkText
             .toLowerCase()
             .replace(/\s/gi, "-")}-custom-header-links`;
+          const localeClass = locale == "blank" ? "" : `.${locale}`;
 
           const anchorAttributes = {
             title: linkTitle,
@@ -47,7 +48,7 @@ export default {
 
           headerLinks.push(
             h(
-              `li.headerLink${deviceClass}${keepOnScrollClass}${linkClass}`,
+              `li.headerLink${deviceClass}${localeClass}${keepOnScrollClass}${linkClass}`,
               h("a", anchorAttributes, linkText)
             )
           );
